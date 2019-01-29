@@ -1,0 +1,156 @@
+
+Incident Management
+	• "An unplanned interruption to an IT Service or reduction in the quality of an IT service. Failure of a configuration item that has not yet affected service is also an incident — for example, failure of one disk from a mirror set. The ITIL incident management process ensures that normal service operation is restored as quickly as possible and the business impact is minimized."
+	• Summary: Service is not working / down or degraded (examples: server is down; application cannot connect; button is not working; transactions are too slow (degraded service); last patch broke our reports)
+	• Impact: Service is unavailable or degraded
+	• Originator: Can be both the customer or the service provider (proactive monitoring)
+	• Objective: Restore the service as quickly as possible by any means (even a workaround)
+	• Out of scope: Root cause analysis / investigation if it's not necessary to restore the service (example: solving incident by rebooting the server does not require investigation of the root cause within Incident ticket, it has to be done through Problem Management process instead)
+	• Usually has SLA Matrix with strict SLAs and penalties (see below)
+	• Usually has exceptions to SLA (see below)
+	• Service fee: Flat monthly fee (usually tied to the strictness of SLA Matrix and relative to size of the penalties)
+
+Problem Management
+	• "The primary objectives of problem management are to prevent problems and resulting incidents from happening, to eliminate recurring incidents, and to minimize the impact of incidents that cannot be prevented."
+	• Summary: Root cause analysis (RCA) for either Incidents or potential future Incidents (examples: we noticed in our predictive analysis that you will run out of disk space in 2 months; investigate RCA of yesterday's already solved Critical Incident; this is the third time same Incident occurred, please investigate root cause)
+	• Impact: There is an existing or potential threat to the service that has to be investigated (whether the service is unavailable or working as intended is not that relevant to Problem Management)
+	• Originator: Can be both the customer or the service provider (proactive monitoring)
+	• Objective: Perform root cause analysis (RCA) - output of Problem Management is just information (no changes)
+	• Out of scope: Performing fixes of any kinds
+		○ If the fault is a state not according to the documentation that Incident is raised to fix the situation
+		○ If the fault is according to the documentation (i.e. bad design), then Change ticket is raised to fix the situation
+	• Usually has SLA Matrix for response time, sometimes even for resolution (dangerous for the service provider as some investigations can take weeks, or even months)
+	• Usually has mild-to-no penalties as it doesn't have direct impact on the service availability
+	• Service fee: Flat monthly fee (usually tied to the estimated monthly effort)
+
+Change Management (in scope)
+	• "The objective of change management is to ensure that standardized methods and procedures are used for efficient and prompt handling of all changes to control IT infrastructure, in order to minimize the number and impact of any related incidents upon service. Changes in the IT infrastructure may arise reactively in response to problems or externally imposed requirements, e.g. legislative changes, or proactively from seeking improved efficiency and effectiveness or to enable or reflect business initiatives, or from programs, projects or service improvement initiatives. Change management can ensure standardized methods, processes and procedures which are used for all changes, facilitate efficient and prompt handling of all changes, and maintain the proper balance between the need for change and the potential detrimental impact of changes."
+	• Summary: Request to change any system or service in an organized manner including evaluation, analysis, effort estimation, approvals, preparation, implementation and handover to operations
+	• Impact: Change needs to be done in the system that requires changing the documentation (examples: changing UI layout; installing new systems; removing systems; changing configuration; changing the process itself (meta-change); security update)
+	• Special type of Changes that usually have their own sub-process:
+		○ Patch / Release Management
+		○ Emergency Change (Change usually tied to Critical Incident that needs to be implemented immediately, approval and impact analysis are done next business day ex-post)
+	• Originator: Can be both the customer or the service provider
+	• Objective: Analyze, prepare and implement the change with minimal impact to service availability - on time, in agreed quality and within the specified budget)
+	• Out of scope: Most activities related to changes are within scope, there are very few exceptions (see Service Request Management below)
+	• Change Management has SLAs only for response, analysis, effort estimation and approval phases. Once approved, the changes are bound by agreed delivery times instead of SLAs (as size of Changes is highly variable and cannot be predicted with global SLAs)
+	• Usually no penalties (except political impacts on the customer when approved delivery times are missed)
+	• Service fees: Flat fee for Changes in pre-agreed scope + extra fee per Change for Changes out of pre-agreed scope
+
+Change Management (project)
+	• Same as Change Management but reserved for larger Changes (=projects) that need adjusted Change process due to necessity of more analysis, approvals and preparation
+	• This process interfaces with Project Management process
+
+Service Request Management / Request Fulfillment / RFI
+	• Requests for non-invasive services where changes in the documentation are not necessary by the nature of the change (examples: create new user; move user to another group; give us information about the configuration; tweaking of variables in the user configuration file; prepare documentation about this service; all other requests for information or changes with almost no impact)
+	• Out of scope: Any larger changes that would require management approval, outage or changes in the configuration / documentation
+	• SLA Matrix is implemented for Response times and usually for Resolution if pre-defined types of requests (individual requests have different Resolution SLAs)
+	• Service fees: Usually billed per effort but hybrid system with pre-paid MDs is also possible
+
+Configuration Management / CMDB
+	• Design, implementation and maintenance of Configuration Management Database (CMDB) which holds all relevant and up to date information about all systems, services, people (Configuration Items) and all their relations (serves as single reference point for the entire system)
+	• SLAs are usually not implemented, only KPIs
+	• Service fees: Flat fee
+
+Capacity Management
+	• Monitoring, evaluation and maintenance of all pre-agreed capacities (examples: server disk, memory and CPU capacity; bandwidth capacity; power lines capacity; spare parts capacity)
+	• SLAs are usually not implemented, only KPIs and overall service availability
+	• Service fees: Flat fee
+
+Security Management
+	• Self-explanatory (Steve)
+	• SLAs are usually not implemented, only KPIs
+	• Service fees: Flat fee
+
+Business Continuity Management
+	• "IT Service Continuity Management (ITSCM) aims to manage risks that could seriously impact IT services. This ITIL process ensures that the IT service provider can always provide minimum agreed Service Levels, by reducing the risk from disaster events to an acceptable level and planning for the recovery of IT services. ITSCM should be designed to support Business Continuity Management."
+	• Summary: All necessary precautions, redundancies and recovery plans for emergencies caused by technical failures, natural disasters, sub-contractor failures, security breaches, data accidents, public image disasters)
+	• SLAs are usually not implemented, only KPIs (tied to audits and drill tests)
+	• Service fees: Flat fee
+
+=======================
+
+Service Definition
+	• It is necessary to define services and service categories precisely to avoid any possible disputes (which have impact on SLAs / KPIs / fees / penalties)
+	• Examples: servers; server groups; software APIs; individual services provided
+
+Service Hours (7/24, 5/10)
+	• Service Hours categories have to be defined which are then tied to individual Services provided and Processes in the SLA Matrix
+	• Examples: Service Hours A: 7/24; Service Hours B: 5/10 (workdays, excluding UK bank holidays, from 8:00 AM to 6:00 PM)
+
+Service Levels (A/B/C)
+	• Service Levels define importance of the system for purposes of prioritization and SLA calculation
+	• Service Levels are defined and then tied to the individual systems or services
+	• Examples: Service Level A: servers XM1091, XM1092, XM1093; Service Level C: automatic monthly report generation script
+
+Priority (1/2/3)
+	• Priority is usually defined as a result of:
+		○ Scope (width of impact)
+		○ Impact (depth / seriousness of impact)
+		○ Urgency (time pressure for restoring the service)
+	• Examples:
+		○ Scope-high, Impact-low, Urgency-low = 5000 impacted users, one minor feature is not working, the feature is used once per month
+		○ Scope-low, Impact-high, Urgency-high = core functionality is not working for few customers
+
+Response and Resolution
+	• Response time is defined as time between ticket creation and first response from the support (ACK)
+	• Resolution time is defined as time between ticket creation (not Response!) and final solution to ticket (Incident: workaround / service restoration; Problem: RCA; Request: Fulfillment)
+	• Exempt from Resolution SLA are times when the ticket is assigned back to the originator with request for additional information or request for cooperation
+	• Exempt from Resolution SLA is NOT when the ticket as assigned to the 3rd party sub-contractor of the service provider as service provider is fully responsible for his sub-contractors
+	• Ticket cannot be closed without explicit approval from the originator / initiator of the ticket
+		• This time (waiting for approval) is also exempt from SLA of the service provider
+		• This time has a pre-agreed timeout period (usually 1 week) after which the ticket is considered "approved by silence" and the ticket can be closed
+
+SLA Matrix
+	• SLA Matrix is the main SLA document combining defined Services with Service Levels and Service Hours cross checked by Priority (Scope / Impact / Urgency) where each resulting cell of the table has defined Response and Resolution SLA
+
+SLA Availability
+	• SLA Availability a form of measuring SLA by defining target minimum availability for each service (usually tied to Service Levels) (examples: Service Level A systems: 99.9%; Service Level B systems: 98%; Service Level C systems: 95%)
+	• Penalties are then derived from percentages of missed target minimum availability
+	• It is not uncommon to have bonuses for overachieving target minimum availability
+	• SLA Availability and SLA Matrix are independent systems of measuring SLA and can be applied in all possible combinations (examples: only SLA Matrix; only SLA Availability; both SLA Matrix and SLA Availability)
+	• SLA Availability can only be used when support service provider has full responsibility for the system and can limit access to the outside elements
+
+Proactive Monitoring
+	• Proactive monitoring is usually part of the agreement of other processes (in case of complete outsourcing)
+	• In case of only proactive monitoring as a support service (example: we just monitor your system and let you know in case of system errors or security threats and then you resolve it yourself) SLA has to be defined only for Response time (it is not possible to use SLA Availability, only SLA Matrix)
+
+Maintenance Windows
+	• Pre-agreed time frames used for maintenance activities (possible outages) which are exempt from all SLA Availability measurements
+	• Maintenance Windows are mutually agreed between the customer and the service provider to cover least important times so outages would have lowest possible impact on the service
+
+Escalation Channels
+	• Escalation Matrix (to management) has to be defined in the contract appendix for purposes of resolving unusual situations, rush requests and all other out-of-process situations
+
+Operations / Steering Meetings
+	• Steering meetings involve management from both sides (customer and service provider) on a regular basis (1-3 months) to:
+		• Evaluate KPIs
+		• Evaluate SLAs
+		• Provide explanation reports from missed SLAs including follow ups
+		• Resolve escalated cases which were not resolved via regular channels
+		• Evaluate overall process performance and decide on improvements
+		• Track progress of larger projects
+
+Reporting
+	• SLA measurement has to be precisely defined in the contract (methods, technologies, guarantees)
+	• Availability measurement has to be precisely defined in the contract (methods, technologies, guarantees)
+	• Reporting has to be precisely defined in the contract (frequency / dates, attributes, outputs)
+
+KPI
+	• KPIs are usually defined as a replacement of SLAs where exact measurement is not possible or as an auxiliary method complementing SLA Matrix and/or SLA Availability
+
+Penalties and Enforcement
+	• Penalties (or possible bonuses) are tied to SLA Matrix and/or SLA Availability
+	• In rare cases they can be tied to KPIs
+
+Exceptions from Responsibility
+	• Contract has to contain a list of exceptions where the support service provider is not liable for service unavailability / outage / degradation
+	• Under the circumstances specified SLA timers are stopped and SLA Availability does not count towards unavailability
+	• This is a safeguard for the support service provider against outside circumstances that could impact SLA / penalties
+	• Usually these exceptions have to be approved by the Steering Committee or at least the customer
+	• Usually these exceptions have to be manually subtracted from the standard SLA calculations on a case-by-case basis
+
+Approved Sub-contractors
+	• Sub-contractors have to be sometimes approved by the customer (example: in case of government contracts)
+	• Most contracts however do not put restrictions on the number or quality of sub-contractors as the support service provider bears full responsibility for their actions and outputs
+
