@@ -1,4 +1,7 @@
 
+https://poe.mikelat.com/
+
+
 Incident Management
 	• "An unplanned interruption to an IT Service or reduction in the quality of an IT service. Failure of a configuration item that has not yet affected service is also an incident — for example, failure of one disk from a mirror set. The ITIL incident management process ensures that normal service operation is restored as quickly as possible and the business impact is minimized."
 	• Summary: Service is not working / down or degraded (examples: server is down; application cannot connect; button is not working; transactions are too slow (degraded service); last patch broke our reports)
